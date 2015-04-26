@@ -270,7 +270,7 @@ Our focus will be on:
 \begin{frame}{Proxy Pattern - The analogy}
  \begin{figure}[htp]
     \centering
-    \includegraphics[width=7cm]{secretary}
+    \includegraphics[width=7cm]{pics/secretary}
     \label{fig:proxy}
     \end{figure}
 \end{frame}
@@ -278,7 +278,7 @@ Our focus will be on:
 \begin{frame}{Proxy Pattern - In Detail}
     \begin{figure}[htp]
     \centering
-    \includegraphics[width=7cm]{proxy2}
+    \includegraphics[width=7cm]{pics/proxy2}
     \label{fig:proxy2}
     \end{figure}
 \end{frame}
@@ -306,7 +306,7 @@ Our focus will be on:
 \begin{frame}{Decorator Pattern - The analogy}
     \begin{figure}[htp]
     \centering
-    \includegraphics[width=6cm]{coffee}
+    \includegraphics[width=6cm]{pics/coffee}
     \label{fig:decorator}
     \end{figure}
 \end{frame}
@@ -314,7 +314,7 @@ Our focus will be on:
 \begin{frame}{Decorator Pattern - In Detail}
     \begin{figure}[htp]
     \centering
-    \includegraphics[width=8cm]{decorator2}
+    \includegraphics[width=8cm]{pics/decorator2}
     \label{fig:decorator2}
     \end{figure}
 \end{frame}
@@ -338,7 +338,7 @@ Our focus will be on:
 \begin{frame}{Fa\c{c}ade Pattern - The analogy}
     \begin{figure}[htp]
     \centering
-    \includegraphics[width=7cm]{facade2}
+    \includegraphics[width=7cm]{pics/facade2}
     \label{fig:facade}
     \end{figure}
 \end{frame}
@@ -347,7 +347,7 @@ Our focus will be on:
 \begin{frame}{Fa\c{c}ade Pattern - In Detail}
     \begin{figure}[htp]
     \centering
-    \includegraphics[width=7cm]{facade}
+    \includegraphics[width=7cm]{pics/facade}
     \label{fig:facade2}
     \end{figure}
 \end{frame}
@@ -359,10 +359,27 @@ Our focus will be on:
 A simple application for fetching location-specific weather information from a web service
     \begin{figure}[htp]
     \centering
-    \includegraphics[width=7cm]{weatherapp}
+    \includegraphics[width=6cm]{pics/weathersearcher2}
+    \label{fig:weather1}
+    \end{figure}
+\end{frame}
+
+ \begin{frame}{The Weather App}
+Upon no location match: a list of suggested locations is returned
+    \begin{figure}[htp]
+    \centering
+    \includegraphics[width=6cm]{pics/weathersearcher}
+    \label{fig:weather2}
+    \end{figure}
+\end{frame}
+
+ \begin{frame}{The Weather App}
+The flow:
+    \begin{figure}[htp]
+    \centering
+    \includegraphics[width=7cm]{pics/weatherapp}
     \label{fig:weather}
     \end{figure}
-    
 \end{frame}
 
 \begin{frame}{The Weather App - analysis}
@@ -414,9 +431,33 @@ function API() {
 \frametitle{The Weather App - refactoring II}
 \textbf{The decorator:}
 \begin{lstlisting}
+//declare the different decorators
+decorators = {};
+decorators.locationsResponse = {
+   render: function(data){
+		//do custom rendering for locations suggestions list...
+	  }};
+	  
+...
+
+var weatherResponse = new BasicResponse(data); 
+if(data.locations != '') {
+    weatherResponse.decorate('locationsResponse');
+}
+weatherResponse.render();
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Weather App - refactoring II}
+\textbf{The decorator:}
+\begin{lstlisting}
+
 function BasicResponse(data) {
-	  this.data = data;
+
 	  this.decorator;
+
 	  this.render = function(){
 		  var resultHTML;
 		  if(this.decorator)
@@ -426,11 +467,6 @@ function BasicResponse(data) {
 			// no decorators added, render normally...
 	} } }
 
-decorators = {};
-decorators.locationsResponse = {
-   render: function(data){
-		//do custom rendering for locations suggestions list...
-	  }};
 \end{lstlisting}
 \end{frame}
 
@@ -444,12 +480,13 @@ decorators.locationsResponse = {
 \end{frame}
 
 
+
 \subsection{Pacman}
 \begin{frame}{Pacman}
 The famous Pacman implemented in JavaScript and HTML5 canvas
     \begin{figure}[htp]
     \centering
-    \includegraphics[width=5cm]{pacman}
+    \includegraphics[width=5cm]{pics/pacman}
     \label{fig:pacman}
     \end{figure}
     
@@ -464,7 +501,7 @@ The famous Pacman implemented in JavaScript and HTML5 canvas
 
     \begin{figure}[htp]
     \centering
-    \includegraphics[width=7cm]{ghosts}
+    \includegraphics[width=7cm]{pics/ghosts}
     \label{fig:ghosts}
     \end{figure}
 \end{frame}
@@ -477,7 +514,7 @@ A huge Ghost.draw() function:
     \end{itemize}
    \begin{figure}[htp]
     \centering
-    \includegraphics[width=8cm]{Legs}
+    \includegraphics[width=8cm]{pics/Legs}
     \label{fig:legs}
     \end{figure}
 \end{frame}
@@ -490,8 +527,8 @@ A huge Ghost.draw() function:
     \end{itemize}
    \begin{figure}[htp]
     \centering
-    \includegraphics[width=10cm]{Code}
-    \label{fig:legs}
+    \includegraphics[width=10cm]{pics/Code}
+    \label{fig:eyes}
     \end{figure}
 \end{frame}
 
@@ -509,12 +546,24 @@ A huge Ghost.draw() function:
     \end{block}
 \end{frame}
 
-\begin{frame}{Pacman - refactoring}
+\begin{frame}[fragile]
+\frametitle{Pacman - refactoring}
 \textbf{Fa\c{c}ade(s):}
    \begin{itemize}
     \item Re-structured the draw() function by using several helper functions
     \item Reuse of code for drawing eyes at different positions, as well as legs
     \end{itemize}
+    \begin{lstlisting}
+    
+Ghost.prototype.eyeBlack = function (offsetX, offsetY){ ... };
+
+Ghost.prototype.eyeWhite = function (){ ... };
+
+Ghost.prototype.legs = function (){ ... };
+
+Ghost.prototype.mouth = function (){ ... };
+
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
