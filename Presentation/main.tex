@@ -149,16 +149,46 @@
 
 % Section and subsections will appear in the presentation overview
 % and table of contents.
-\section{Definition And Motivation}
 
-\begin{frame}{Structural Patterns}%{Optional Subtitle}
+\section{Introduction}
+\begin{frame}<beamer>{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{Introduction}%{Optional Subtitle}
+\emph{Design Patterns: Elements of Reusable Object-Oriented Software, 1994}.\footnotemark
+ \begin{figure}[htp]
+    \centering
+    \includegraphics[width=3cm]{pics/gof}
+    \label{fig:gof}
+    \end{figure}
+Written by: Gamma, Helm, Johnson and Vlissides (aka. The Gang of four)
+
+\footnotetext[1]{http://c2.com/cgi/wiki?DesignPatternsBook}
+\end{frame}
+
+\begin{frame}{Categorizing patterns}
+In the GoF book, patterns were classified according to their \emph purpose.
+
+According to this classification, patterns can have either a \textbf{creational}, \textbf{structural}, or \textbf{behavioral} purpose.
+\end{frame}
+
+
+\section{Structural patterns: definition}
+
+\begin{frame}<beamer>{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+
+
+\begin{frame}{Structural Patterns}
  \begin{block}{Definition}
  \begin{itemize}
    \item {Concerned with how object are composed to form more complex structures}
    \item {Provide simple ways to realize relationships between objects}
  \end{itemize}
  \end{block}
- 
+ \pause
  \begin{block}{Motivation}
  \begin{itemize}
    \item {Flexibility to change}
@@ -355,13 +385,16 @@ Our focus will be on:
 \section{Structural patterns in action}
 \subsection{The Weather App}
 
- \begin{frame}{The Weather App}
+ \begin{frame}{The Weather App\footnotemark}
 A simple application for fetching location-specific weather information from a web service
     \begin{figure}[htp]
     \centering
     \includegraphics[width=6cm]{pics/weathersearcher2}
     \label{fig:weather1}
     \end{figure}
+    
+\footnotetext[2]{https://github.com/flamingveggies/weathersearcher}
+
 \end{frame}
 
  \begin{frame}{The Weather App}
@@ -482,14 +515,14 @@ function BasicResponse(data) {
 
 
 \subsection{Pacman}
-\begin{frame}{Pacman}
+\begin{frame}{Pacman\footnotemark}
 The famous Pacman implemented in JavaScript and HTML5 canvas
     \begin{figure}[htp]
     \centering
     \includegraphics[width=5cm]{pics/pacman}
     \label{fig:pacman}
     \end{figure}
-    
+\footnotetext[3]{https://github.com/bxia/Javascript-Pacman}
 \end{frame}
 
 \begin{frame}{Pacman - ghosts.js}
@@ -548,7 +581,7 @@ A huge Ghost.draw() function:
 
 \begin{frame}[fragile]
 \frametitle{Pacman - refactoring}
-\textbf{Fa\c{c}ade(s):}
+\textbf{Fa\c{c}ade:}
    \begin{itemize}
     \item Re-structured the draw() function by using several helper functions
     \item Reuse of code for drawing eyes at different positions, as well as legs
@@ -568,7 +601,7 @@ Ghost.prototype.mouth = function (){ ... };
 
 \begin{frame}[fragile]
 \frametitle{Pacman - refactoring}
-\textbf{Fa\c{c}ade(s):}
+\textbf{Fa\c{c}ade:}
 \begin{lstlisting}
 Ghost.prototype.eyeBlack = function (offsetX, offsetY){
 	ctx.fillStyle="black";
@@ -625,9 +658,21 @@ break;
 \end{frame}
 % All of the following is optional and typically not needed. 
 
+\begin{frame}[fragile]
+\frametitle{Summary IV}
+Interesting to compare:
+\begin{itemize}
+\item \textbf{Adapter} provides a different interface to its subject. \textbf{Proxy} provides the same interface. \textbf{Decorator} provides an enhanced interface.
+
+\item \url{https://sourcemaking.com/design_patterns/structural_patterns}
+\end{itemize}
+\end{frame}
+
+
+
 \begin{frame}
   \frametitle{References}    
-  \begin{thebibliography}{5}    
+  \begin{thebibliography}{6}    
   
   \beamertemplatebookbibitems
   \bibitem{stefanov2010}
@@ -640,6 +685,12 @@ break;
    Osmani, A.
     \newblock {\em Learning JavaScript Design Patterns}.
     \newblock O'Reilly Media, 2012.
+    
+  \beamertemplatebookbibitems
+  \bibitem{gof1994}
+  Gamma, E. and Helm, R. and Johnson, R. and Vlissides, J.
+    \newblock {\em Design Patterns: Elements of Reusable Object-oriented Software}.
+    \newblock Addison-Wesley Longman Publishing Co., 1994.
   
   \setbeamertemplate{bibliography item}[online]
   \bibitem{A} Sourcemaking
