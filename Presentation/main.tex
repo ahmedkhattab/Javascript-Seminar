@@ -488,17 +488,19 @@ weatherResponse.render();
 \begin{lstlisting}
 
 function BasicResponse(data) {
+    this.decorator;
+    this.data = data;
+}
 
-	  this.decorator;
-
-	  this.render = function(){
-		  var resultHTML;
-		  if(this.decorator)
-			// a decorator exists, use it to render
-			decorators[this.decorator].render(this.data);
-		  else {
-			// no decorators added, render normally...
-	} } }
+BasicResponse.prototype.render = function(){
+	var resultHTML;
+	if(this.decorator){
+		// a decorator exists, use it to render	
+	    decorators[this.decorator].render(this.data);
+	}
+	else {
+		// no decorators added, render normally...
+	}} 
 
 \end{lstlisting}
 \end{frame}
@@ -547,7 +549,7 @@ A huge Ghost.draw() function:
     \end{itemize}
    \begin{figure}[htp]
     \centering
-    \includegraphics[width=8cm]{pics/Legs}
+    \includegraphics[width=9cm]{pics/Legs}
     \label{fig:legs}
     \end{figure}
 \end{frame}
@@ -560,7 +562,7 @@ A huge Ghost.draw() function:
     \end{itemize}
    \begin{figure}[htp]
     \centering
-    \includegraphics[width=10cm]{pics/Code}
+    \includegraphics[width=11cm]{pics/Code}
     \label{fig:eyes}
     \end{figure}
 \end{frame}
