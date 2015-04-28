@@ -464,28 +464,6 @@ function API() {
 \frametitle{The Weather App - refactoring II}
 \textbf{The decorator:}
 \begin{lstlisting}
-//declare the different decorators
-decorators = {};
-decorators.locationsResponse = {
-   render: function(data){
-		//do custom rendering for locations suggestions list...
-	  }};
-	  
-...
-
-var weatherResponse = new BasicResponse(data); 
-if(data.locations != '') {
-    weatherResponse.decorate('locationsResponse');
-}
-weatherResponse.render();
-
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{The Weather App - refactoring II}
-\textbf{The decorator:}
-\begin{lstlisting}
 
 function BasicResponse(data) {
     this.decorator;
@@ -501,6 +479,28 @@ BasicResponse.prototype.render = function(){
 	else {
 		// no decorators added, render normally...
 	}} 
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Weather App - refactoring II}
+\textbf{The decorator:}
+\begin{lstlisting}
+//declare the different decorators
+decorators = {};
+decorators.locationsResponse = {
+   render: function(data){
+		//do custom rendering for locations suggestions list...
+	  }};
+	  
+...
+
+var weatherResponse = new BasicResponse(data); 
+if(data.locations != '') {
+    weatherResponse.decorate('locationsResponse');
+}
+weatherResponse.render();
 
 \end{lstlisting}
 \end{frame}
